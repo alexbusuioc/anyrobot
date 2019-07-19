@@ -1,0 +1,424 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="547.2,5742.4" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:p="http://schemas.uipath.com/workflow/activities/word" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="42">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="30">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>UiPath.Word</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="507.2,5662.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="detaliiCompanieDT" />
+      <Variable x:TypeArguments="sd:DataTable" Name="detaliiFunctiiDT" />
+      <Variable x:TypeArguments="s:String[]" Name="companiiArray" />
+      <Variable x:TypeArguments="s:String[]" Name="functiiArray" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="FormPayload" />
+      <Variable x:TypeArguments="njl:JObject" Name="jsonPagina2" />
+      <Variable x:TypeArguments="njl:JObject" Name="jsonPagina3" />
+      <Variable x:TypeArguments="njl:JObject" Name="jsonPagina4" />
+      <Variable x:TypeArguments="sd:DataTable" Name="companiaSelectataDT" />
+      <Variable x:TypeArguments="sd:DataTable" Name="functieSelectataDT" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="dictionarCompanieSelectata" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="dictionarFunctieSelectata" />
+      <Variable x:TypeArguments="x:String" Name="directorAngajatNou" />
+      <Variable x:TypeArguments="x:String" Name="directorDocumente" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ReadFromExcelDatabase workflow" sap:VirtualizedContainerService.HintSize="468.8,88" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ReadFromExcelDatabase.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="detaliiCompanieDT">[detaliiCompanieDT]</InOutArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="detaliiFunctiiDT">[detaliiFunctiiDT]</InOutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim tempArr As New ArrayList&#xA;For Each row As DataRow In detaliiCompanieDT.Rows&#xA;    tempArr.Add(row(1).ToString())&#xA;Next row&#xA;companiiArray = tempArr.Cast(Of String)().ToArray&#xA;&#xA;&#xA;Dim tempArr2 As New ArrayList&#xA;For Each row As DataRow In detaliiFunctiiDT.Rows&#xA;    tempArr2.Add(row(1).ToString())&#xA;Next row&#xA;functiiArray = tempArr2.Cast(Of String)().ToArray" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="468.8,164.8" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="detaliiCompanieDT">[detaliiCompanieDT]</InArgument>
+        <OutArgument x:TypeArguments="s:String[]" x:Key="companiiArray">[companiiArray]</OutArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="detaliiFunctiiDT">[detaliiFunctiiDT]</InArgument>
+        <OutArgument x:TypeArguments="s:String[]" x:Key="functiiArray">[functiiArray]</OutArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Form workflow" sap:VirtualizedContainerService.HintSize="468.8,88" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Form.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="s:String[]" x:Key="companiiArray">[companiiArray]</InArgument>
+        <InArgument x:TypeArguments="s:String[]" x:Key="functiiArray">[functiiArray]</InArgument>
+        <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="FormPayload">[FormPayload]</OutArgument>
+        <OutArgument x:TypeArguments="njl:JObject" x:Key="jsonPagina2">[jsonPagina2]</OutArgument>
+        <OutArgument x:TypeArguments="njl:JObject" x:Key="jsonPagina3">[jsonPagina3]</OutArgument>
+        <OutArgument x:TypeArguments="njl:JObject" x:Key="jsonPagina4">[jsonPagina4]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <Assign sap:VirtualizedContainerService.HintSize="468.8,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[companiaSelectataDT]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[detaliiCompanieDT.Select("NumeSocietate  LIKE '%" + jsonPagina3.GetValue("NumeSocietate").ToString+ "%'").CopyToDataTable()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="468.8,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[functieSelectataDT]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[detaliiFunctiiDT.Select("FunctieAngajat  LIKE '%" + jsonPagina3.GetValue("FunctieAngajat").ToString + "%'").CopyToDataTable()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="dictionarCompanieSelectata  = New Dictionary(Of String, String)&#x9;&#x9;&#xD;&#xA;dictionarFunctieSelectata  =  New Dictionary(Of String, String)&#xD;&#xA;&#x9;&#x9;&#x9;&#xD;&#xA;For Each row As DataRow In companiaSelectataDT.Rows&#xD;&#xA;    For Each col As DataColumn In companiaSelectataDT.Columns&#xD;&#xA;&#x9;&#x9;dictionarCompanieSelectata.Add(col.ToString(),row(col).ToString())&#xD;&#xA;&#x9;Next col&#xD;&#xA;Next row&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;&#xD;&#xA;For Each row As DataRow In functieSelectataDT.Rows&#xD;&#xA;    For Each col As DataColumn In functieSelectataDT.Columns&#xD;&#xA;&#x9;&#x9;dictionarFunctieSelectata.Add(col.ToString(),row(col).ToString())&#xD;&#xA;&#x9;Next col&#xD;&#xA;Next row" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="468.8,164.8" sap2010:WorkflowViewState.IdRef="InvokeCode_2">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="companiaSelectataDT">[companiaSelectataDT]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="functieSelectataDT">[functieSelectataDT]</InArgument>
+        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="dictionarCompanieSelectata">[dictionarCompanieSelectata]</InOutArgument>
+        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="dictionarFunctieSelectata">[dictionarFunctieSelectata]</InOutArgument>
+      </ui:InvokeCode.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeCode>
+    <Sequence DisplayName="Copy template files" sap:VirtualizedContainerService.HintSize="468.8,752" sap2010:WorkflowViewState.IdRef="Sequence_10">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Assign sap:VirtualizedContainerService.HintSize="259.2,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[directorDocumente]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">C:\Users\aione\Desktop\UiPath\ANY WORK\Documente de angajare</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap:VirtualizedContainerService.HintSize="259.2,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[directorAngajatNou]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">["C:\Users\aione\Desktop\UiPath\ANY WORK\AngajatNou - " + jsonPagina2.GetValue("NumeAngajat").ToString]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Directory" sap:VirtualizedContainerService.HintSize="259.2,22.4" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[directorAngajatNou]" />
+      <ui:CopyFile ContinueOnError="{x:Null}" Destination="[directorAngajatNou + &quot;\04. Acord privind regulamentul intern.docx&quot;]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="259.2,22.4" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[directorDocumente + &quot;\04. Acord privind regulamentul intern.docx&quot;]" />
+      <ui:CopyFile ContinueOnError="{x:Null}" Destination="[directorAngajatNou + &quot;\01 CIM.docx&quot;]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="259.2,22.4" sap2010:WorkflowViewState.IdRef="CopyFile_2" Overwrite="True" Path="[directorDocumente + &quot;\01 CIM.docx&quot;]" />
+      <ui:CopyFile ContinueOnError="{x:Null}" Destination="[directorAngajatNou + &quot;\05. Angajament de confidentialitate.docx&quot;]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="259.2,22.4" sap2010:WorkflowViewState.IdRef="CopyFile_4" Overwrite="True" Path="[directorDocumente + &quot;\05. Angajament de confidentialitate.docx&quot;]" />
+      <ui:CopyFile ContinueOnError="{x:Null}" Destination="[directorAngajatNou + &quot;\06. Nota de informare salariati.docx&quot;]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="259.2,22.4" sap2010:WorkflowViewState.IdRef="CopyFile_5" Overwrite="True" Path="[directorDocumente + &quot;\06. Nota de informare salariati.docx&quot;]" />
+      <ui:CopyFile ContinueOnError="{x:Null}" Destination="[directorAngajatNou + &quot;\03. Cerere de angajare.docx&quot;]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="259.2,22.4" sap2010:WorkflowViewState.IdRef="CopyFile_3" Overwrite="True" Path="[directorDocumente+ &quot;\03. Cerere de angajare.docx&quot;]" />
+      <ui:CopyFile ContinueOnError="{x:Null}" Destination="[directorAngajatNou + &quot;\07 Oferta angajare.docx&quot;]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="259.2,22.4" sap2010:WorkflowViewState.IdRef="CopyFile_6" Overwrite="True" Path="[directorDocumente + &quot;\07 Oferta angajare.docx&quot;]" />
+      <ui:CopyFile ContinueOnError="{x:Null}" Destination="[directorAngajatNou + &quot;\&quot;+dictionarFunctieSelectata(&quot;DenumireDocumentFisaPost&quot;)]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="259.2,22.4" sap2010:WorkflowViewState.IdRef="CopyFile_7" Overwrite="True" Path="[directorDocumente + &quot;\Fisa Postului\&quot; + dictionarFunctieSelectata(&quot;DenumireDocumentFisaPost&quot;)]" />
+    </Sequence>
+    <Sequence DisplayName="Replace from templates sequence" sap:VirtualizedContainerService.HintSize="468.8,3912" sap2010:WorkflowViewState.IdRef="Sequence_11">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <p:WordApplicationScope DisplayName="Replace Text 1 CIM" FilePath="[directorAngajatNou + &quot;\01 CIM.docx&quot;]" sap:VirtualizedContainerService.HintSize="430.4,3262.4" sap2010:WorkflowViewState.IdRef="WordApplicationScope_2">
+        <p:WordApplicationScope.Body>
+          <ActivityAction x:TypeArguments="ui:WordDocument">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="ui:WordDocument" Name="WordDocumentScope" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="368.8,3152.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_10" Replace="[jsonPagina3.GetValue(&quot;NrContract&quot;).ToString]" Search="%[*NrContract*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_11" Replace="[jsonPagina3.GetValue(&quot;DataContract&quot;).ToString]" Search="%[*DataContract*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_22" Replace="[jsonPagina3.GetValue(&quot;DataIncepereActivitate&quot;).ToString]" Search="%[*DataIncepereActivitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_12" Replace="[jsonPagina4.GetValue(&quot;NrRevisal&quot;).ToString]" Search="%[*NrRevisal*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_13" Replace="[jsonPagina2.GetValue(&quot;NumeAngajat&quot;).ToString]" Search="%[*NumeAngajat*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_14" Replace="[jsonPagina2.GetValue(&quot;DomiciliuAngajat&quot;).ToString]" Search="%[*DomiciliuAngajat*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_15" Replace="[jsonPagina2.GetValue(&quot;NumeActIdentitate&quot;).ToString]" Search="%[*NumeActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_16" Replace="[jsonPagina2.GetValue(&quot;SerieActIdentitate&quot;).ToString]" Search="%[*SerieActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_17" Replace="[jsonPagina2.GetValue(&quot;NrActIdentitate&quot;).ToString]" Search="%[*NrActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_18" Replace="[jsonPagina2.GetValue(&quot;CNP&quot;).ToString]" Search="%[*CNP*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_19" Replace="[jsonPagina2.GetValue(&quot;EmitentActIdentitate&quot;).ToString]" Search="%[*EmitentActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_20" Replace="[jsonPagina2.GetValue(&quot;DataEliberareActIdentitate&quot;).ToString]" Search="%[*DataEliberareActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_21" Replace="[jsonPagina3.GetValue(&quot;Salariul&quot;).ToString]" Search="%[*Salariul*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_50" Replace="[dictionarCompanieSelectata(&quot;NumeSocietate&quot;)]" Search="%[*NumeSocietate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_51" Replace="[dictionarCompanieSelectata(&quot;SediuSocietate&quot;)]" Search="%[*SediuSocietate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_52" Replace="[dictionarCompanieSelectata(&quot;LocRegComert&quot;)]" Search="%[*LocRegComert*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_53" Replace="[dictionarCompanieSelectata(&quot;NrRegComert&quot;)]" Search="%[*NrRegComert*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_54" Replace="[dictionarCompanieSelectata(&quot;CUI&quot;)]" Search="%[*CUI*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_55" Replace="[dictionarCompanieSelectata(&quot;NrTelefon&quot;)]" Search="%[*NrTelefon*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_56" Replace="[dictionarCompanieSelectata(&quot;NumeReprezentantLegal&quot;)]" Search="%[*NumeReprezentantLegal*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_57" Replace="[dictionarCompanieSelectata(&quot;FunctieReprezentantLegal&quot;)]" Search="%[*FunctieReprezentantLegal*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_58" Replace="[dictionarCompanieSelectata(&quot;FunctieReprezentantLegal&quot;)]" Search="%[*OrasPunctDeLucru*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_59" Replace="[dictionarFunctieSelectata(&quot;FunctieAngajat&quot;)]" Search="%[*FunctieAngajat*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_60" Replace="[dictionarFunctieSelectata(&quot;CodCorAngajat&quot;)]" Search="%[*CodCorAngajat*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_61" Replace="[dictionarFunctieSelectata(&quot;NrOreDeMuncaPeZi&quot;)]" Search="%[*NrOreDeMuncaPeZi*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_62" Replace="[dictionarFunctieSelectata(&quot;NrOreDeMuncaPeSaptamana&quot;)]" Search="%[*NrOreDeMuncaPeSaptamana*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_63" Replace="[dictionarFunctieSelectata(&quot;NrZileConcediuAnual&quot;)]" Search="%[*NrZileConcediuAnual*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_64" Replace="[dictionarFunctieSelectata(&quot;DataPlataSalariu&quot;)]" Search="%[*DataPlataSalariu*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_65" Replace="[dictionarFunctieSelectata(&quot;NrZilePerioasaDeProba&quot;)]" Search="%[*NrZilePerioasaDeProba*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_66" Replace="[dictionarFunctieSelectata(&quot;NrZilePreavizConcediere&quot;)]" Search="%[*NrZilePreavizConcediere*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_67" Replace="[dictionarFunctieSelectata(&quot;NrZilePreavizDemisie&quot;)]" Search="%[*NrZilePreavizDemisie*]" />
+            </Sequence>
+          </ActivityAction>
+        </p:WordApplicationScope.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </p:WordApplicationScope>
+      <p:WordApplicationScope DisplayName="Replace text  2 FP" FilePath="[directorAngajatNou + &quot;\&quot;+dictionarFunctieSelectata(&quot;DenumireDocumentFisaPost&quot;)]" sap:VirtualizedContainerService.HintSize="430.4,52.8" sap2010:WorkflowViewState.IdRef="WordApplicationScope_3">
+        <p:WordApplicationScope.Body>
+          <ActivityAction x:TypeArguments="ui:WordDocument">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="ui:WordDocument" Name="WordDocumentScope" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="368.8,652.8" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_24" Replace="[jsonPagina2.GetValue(&quot;NumeAngajat&quot;).ToString]" Search="%[*NumeAngajat*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_48" Replace="[jsonPagina3.GetValue(&quot;DataContract&quot;).ToString]" Search="%[*DataContract*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_92" Replace="[dictionarCompanieSelectata(&quot;NumeSocietate&quot;)]" Search="%[*NumeSocietate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_93" Replace="[dictionarFunctieSelectata(&quot;NrOreDeMuncaPeZi&quot;)]" Search="%[*NrOreDeMuncaPeZi*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_94" Replace="[dictionarFunctieSelectata(&quot;NrOreDeMuncaPeSaptamana&quot;)]" Search="%[*NrOreDeMuncaPeSaptamana*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_95" Replace="[dictionarCompanieSelectata(&quot;NumeReprezentantLegal&quot;)]" Search="%[*NumeReprezentantLegal*]" />
+            </Sequence>
+          </ActivityAction>
+        </p:WordApplicationScope.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </p:WordApplicationScope>
+      <p:WordApplicationScope DisplayName="Replace text  3 CA" FilePath="[directorAngajatNou + &quot;\03. Cerere de angajare.docx&quot;]" sap:VirtualizedContainerService.HintSize="430.4,52.8" sap2010:WorkflowViewState.IdRef="WordApplicationScope_7">
+        <p:WordApplicationScope.Body>
+          <ActivityAction x:TypeArguments="ui:WordDocument">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="ui:WordDocument" Name="WordDocumentScope" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="368.8,952.8" sap2010:WorkflowViewState.IdRef="Sequence_27">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_96" Replace="[jsonPagina2.GetValue(&quot;NumeAngajat&quot;).ToString]" Search="%[*NumeAngajat*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_97" Replace="[jsonPagina2.GetValue(&quot;DomiciliuAngajat&quot;).ToString]" Search="%[*DomiciliuAngajat*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_98" Replace="[jsonPagina2.GetValue(&quot;NumeActIdentitate&quot;).ToString]" Search="%[*NumeActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_99" Replace="[jsonPagina2.GetValue(&quot;SerieActIdentitate&quot;).ToString]" Search="%[*SerieActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_100" Replace="[jsonPagina2.GetValue(&quot;NrActIdentitate&quot;).ToString]" Search="%[*NrActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_101" Replace="[jsonPagina2.GetValue(&quot;EmitentActIdentitate&quot;).ToString]" Search="%[*EmitentActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_102" Replace="[jsonPagina2.GetValue(&quot;DataEliberareActIdentitate&quot;).ToString]" Search="%[*DataEliberareActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_103" Replace="[jsonPagina2.GetValue(&quot;CNP&quot;).ToString]" Search="%[*CNP*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_104" Replace="[jsonPagina3.GetValue(&quot;DataContract&quot;).ToString]" Search="%[*DataContract*]" />
+            </Sequence>
+          </ActivityAction>
+        </p:WordApplicationScope.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </p:WordApplicationScope>
+      <p:WordApplicationScope DisplayName="Replace Text  4 APRI" FilePath="[directorAngajatNou + &quot;\04. Acord privind regulamentul intern.docx&quot;]" sap:VirtualizedContainerService.HintSize="430.4,52.8" sap2010:WorkflowViewState.IdRef="WordApplicationScope_1">
+        <p:WordApplicationScope.Body>
+          <ActivityAction x:TypeArguments="ui:WordDocument">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="ui:WordDocument" Name="WordDocumentScope" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="216,68.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_1" Replace="[jsonPagina2.GetValue(&quot;NumeAngajat&quot;).ToString]" Search="%[*NumeAngajat*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_2" Replace="[jsonPagina2.GetValue(&quot;DomiciliuAngajat&quot;).ToString]" Search="%[*DomiciliuAngajat*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_3" Replace="[jsonPagina2.GetValue(&quot;NumeActIdentitate&quot;).ToString]" Search="%[*NumeActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_4" Replace="[jsonPagina2.GetValue(&quot;SerieActIdentitate&quot;).ToString]" Search="%[*SerieActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_5" Replace="[jsonPagina2.GetValue(&quot;NrActIdentitate&quot;).ToString]" Search="%[*NrActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_8" Replace="[jsonPagina2.GetValue(&quot;CNP&quot;).ToString]" Search="%[*CNP*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_6" Replace="[jsonPagina2.GetValue(&quot;EmitentActIdentitate&quot;).ToString]" Search="%[*EmitentActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_7" Replace="[jsonPagina2.GetValue(&quot;DataEliberareActIdentitate&quot;).ToString]" Search="%[*DataEliberareActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_9" Replace="[jsonPagina3.GetValue(&quot;DataContract&quot;).ToString]" Search="%[*DataContract*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_68" Replace="[dictionarCompanieSelectata(&quot;NumeSocietate&quot;)]" Search="%[*NumeSocietate*]" />
+            </Sequence>
+          </ActivityAction>
+        </p:WordApplicationScope.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </p:WordApplicationScope>
+      <p:WordApplicationScope DisplayName="Replace Text 5 AC" FilePath="[directorAngajatNou + &quot;\05. Angajament de confidentialitate.docx&quot;]" sap:VirtualizedContainerService.HintSize="430.4,52.8" sap2010:WorkflowViewState.IdRef="WordApplicationScope_4">
+        <p:WordApplicationScope.Body>
+          <ActivityAction x:TypeArguments="ui:WordDocument">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="ui:WordDocument" Name="WordDocumentScope" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="368.8,1752.8" sap2010:WorkflowViewState.IdRef="Sequence_5">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_33" Replace="[jsonPagina2.GetValue(&quot;NumeAngajat&quot;).ToString]" Search="%[*NumeAngajat*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_34" Replace="[jsonPagina2.GetValue(&quot;DomiciliuAngajat&quot;).ToString]" Search="%[*DomiciliuAngajat*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_35" Replace="[jsonPagina2.GetValue(&quot;NumeActIdentitate&quot;).ToString]" Search="%[*NumeActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_36" Replace="[jsonPagina2.GetValue(&quot;SerieActIdentitate&quot;).ToString]" Search="%[*SerieActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_37" Replace="[jsonPagina2.GetValue(&quot;NrActIdentitate&quot;).ToString]" Search="%[*NrActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_38" Replace="[jsonPagina2.GetValue(&quot;EmitentActIdentitate&quot;).ToString]" Search="%[*EmitentActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_39" Replace="[jsonPagina2.GetValue(&quot;DataEliberareActIdentitate&quot;).ToString]" Search="%[*DataEliberareActIdentitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_40" Replace="[jsonPagina2.GetValue(&quot;CNP&quot;).ToString]" Search="%[*CNP*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_41" Replace="[jsonPagina3.GetValue(&quot;NrContract&quot;).ToString]" Search="%[*NrContract*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_42" Replace="[jsonPagina3.GetValue(&quot;DataContract&quot;).ToString]" Search="%[*DataContract*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_69" Replace="[dictionarCompanieSelectata(&quot;NumeSocietate&quot;)]" Search="[*NumeSocietate*] " />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_70" Replace="[dictionarCompanieSelectata(&quot;SediuSocietate&quot;)]" Search="%[*SediuSocietate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_71" Replace="[dictionarCompanieSelectata(&quot;LocRegComert&quot;)]" Search="%[*LocRegComert*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_72" Replace="[dictionarCompanieSelectata(&quot;CUI&quot;)]" Search="%[*CUI*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_73" Replace="[dictionarCompanieSelectata(&quot;NumeReprezentantLegal&quot;)]" Search="%[*NumeReprezentantLegal*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_105" Replace="[dictionarFunctieSelectata(&quot;FunctieAngajat&quot;)]" Search="%[*FunctieAngajat*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_79" Replace="[dictionarCompanieSelectata(&quot;NrRegComert&quot;)]" Search="%[*NrRegComert*]" />
+            </Sequence>
+          </ActivityAction>
+        </p:WordApplicationScope.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </p:WordApplicationScope>
+      <p:WordApplicationScope DisplayName="Replace text 6 NIS" FilePath="[directorAngajatNou + &quot;\06. Nota de informare salariati.docx&quot;]" sap:VirtualizedContainerService.HintSize="430.4,52.8" sap2010:WorkflowViewState.IdRef="WordApplicationScope_5">
+        <p:WordApplicationScope.Body>
+          <ActivityAction x:TypeArguments="ui:WordDocument">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="ui:WordDocument" Name="WordDocumentScope" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="368.8,652.8" sap2010:WorkflowViewState.IdRef="Sequence_6">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_43" Replace="[jsonPagina2.GetValue(&quot;NumeAngajat&quot;).ToString]" Search="%[*NumeAngajat*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_44" Replace="[jsonPagina3.GetValue(&quot;DataContract&quot;).ToString]" Search="%[*DataContract*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_75" Replace="[dictionarCompanieSelectata(&quot;NumeSocietate&quot;)]" Search="%[*NumeSocietate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_76" Replace="[dictionarCompanieSelectata(&quot;SediuSocietate&quot;)]" Search="%[*SediuSocietate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_77" Replace="[dictionarCompanieSelectata(&quot;CUI&quot;)]" Search="%[*CUI*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_78" Replace="[dictionarCompanieSelectata(&quot;NrRegComert&quot;)]" Search="%[*NrRegComert*]" />
+            </Sequence>
+          </ActivityAction>
+        </p:WordApplicationScope.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </p:WordApplicationScope>
+      <p:WordApplicationScope DisplayName="Replace Text 7 OA" FilePath="[directorAngajatNou + &quot;\07 Oferta angajare.docx&quot;]" sap:VirtualizedContainerService.HintSize="216,52.8" sap2010:WorkflowViewState.IdRef="WordApplicationScope_6">
+        <p:WordApplicationScope.Body>
+          <ActivityAction x:TypeArguments="ui:WordDocument">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="ui:WordDocument" Name="WordDocumentScope" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="368.8,1652.8" sap2010:WorkflowViewState.IdRef="Sequence_7">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_45" Replace="[jsonPagina2.GetValue(&quot;NumeAngajat&quot;).ToString]" Search="%[*NumeAngajat*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_46" Replace="[jsonPagina3.GetValue(&quot;DurataDeMunca&quot;).ToString]" Search="%[*DurataDeMunca*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_47" Replace="[jsonPagina3.GetValue(&quot;NormaDeMunca&quot;).ToString]" Search="%[*NormaDeMunca*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_49" Replace="[jsonPagina3.GetValue(&quot;Salariul&quot;).ToString]" Search="%[*Salariul*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_80" Replace="[dictionarCompanieSelectata(&quot;NumeSocietate&quot;)]" Search="%[*NumeSocietate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_81" Replace="[dictionarCompanieSelectata(&quot;SediuSocietate&quot;)]" Search="%[*SediuSocietate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_82" Replace="[dictionarCompanieSelectata(&quot;LocRegComert&quot;)]" Search="%[*LocRegComert*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_83" Replace="[dictionarCompanieSelectata(&quot;NrRegComert&quot;)]" Search="%[*NrRegComert*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_84" Replace="[dictionarCompanieSelectata(&quot;CUI&quot;)]" Search="%[*CUI*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_85" Replace="[dictionarCompanieSelectata(&quot;NrTelefon&quot;)]" Search="%[*NrTelefon*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_86" Replace="[dictionarCompanieSelectata(&quot;NumeReprezentantLegal&quot;)]" Search="%[*NumeReprezentantLegal*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_87" Replace="[dictionarCompanieSelectata(&quot;FunctieReprezentantLegal&quot;)]" Search="%[*FunctieReprezentantLegal*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_88" Replace="[dictionarFunctieSelectata(&quot;FunctieAngajat&quot;)]" Search="%[*FunctieAngajat*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_89" Replace="[jsonPagina3.GetValue(&quot;DataIncepereActivitate&quot;).ToString]" Search="%[*DataIncepereActivitate*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_90" Replace="[dictionarFunctieSelectata(&quot;NrZilePerioasaDeProba&quot;)]" Search="%[*NrZilePerioasaDeProba*]" />
+              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="330.4,60" sap2010:WorkflowViewState.IdRef="WordReplaceText_91" Replace="[dictionarFunctieSelectata(&quot;NrOreDeMuncaPeZi&quot;)]" Search="%[*NrOreDeMuncaPeZi*]" />
+            </Sequence>
+          </ActivityAction>
+        </p:WordApplicationScope.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </p:WordApplicationScope>
+    </Sequence>
+  </Sequence>
+</Activity>
